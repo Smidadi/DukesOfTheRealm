@@ -1,0 +1,10 @@
+package SampleGame;
+
+public class Main {
+	public static void main(String[] args) {
+		Castle c = new Castle("Moi");
+		for(int i = 0; i < c.tabTroupes.length; i++) {
+			System.out.println(c.tabTroupes[i]);
+		}
+	}
+}
