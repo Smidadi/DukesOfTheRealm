@@ -11,9 +11,8 @@ public class Coordonnee {
 	int x, y;
 	
 	public Coordonnee() {
-		this.x = (int) (Math.random()*1501);
-		this.y = (int) (Math.random()*1001);
-		
+		this.x = (int) (25 + Math.random()* 1451);
+		this.y = (int) (25 + Math.random()* 951);		
 	}
 	
 	public Coordonnee(int dx, int dy) {

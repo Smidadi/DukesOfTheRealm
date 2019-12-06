@@ -23,8 +23,8 @@ public class Castle {	// w : 1500 ; h : 1000 pour la map
 		this.duc = duc;
 		this.tresor = 0;
 		this.niveau = 1;
-		//this.porte = rand;
-		//this.coordonee_du_chateau = autre fichier pour créer carré + porte
+		this.porte = new BuiltCastle.elCastleDoor();
+		this.coordonee_du_chateau = autre fichier pour créer carré + porte
 		this.tabTroupes = Troupes.createTroupes(4,2,2);
 		this.piquier = countTroupes("Piquier", tabTroupes);	// voir si necessaire de le mettre ou si on l'affiche lors de l'appel � l'affichage des troupes
 		this.chevalier = countTroupes("Chevalier", tabTroupes);
