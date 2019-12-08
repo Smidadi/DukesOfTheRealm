@@ -11,97 +11,58 @@ public class Troupes {
 	private int vie;
 	private int degat;
 	
-	public Troupes(String t) {
-		switch(t) {
-		case "Piquier" : 
-			Piquier();
-			break;
-		case "Chevalier" :
-			Chevalier();
-			break;
-		case "Onagre" : 
-			Onagre();
-			break;
-		}
-	}
+	// Taille troupes : 10 px | Piquier : triangle | Onagre : carre | Chevalier : rond
+	
 	
 	public static ArrayList<Troupes> createTroupes(int p, int c, int o) {
 		ArrayList<Troupes> tab = new ArrayList<Troupes>();
 		
 		for(int i = 0; i < p; i++) {
-			tab.add(new Troupes("Piquier"));
+			tab.add(new Piquier());
 		}
 		
 		for(int i = 0; i < c; i++) {
-			tab.add(new Troupes("Chevalier"));
+			tab.add(new Chevalier());
 		}
 		
 		for(int i = 0; i < o; i++) {
-			tab.add(new Troupes("Onagre"));
+			tab.add(new Onagre());
 		}
 		
 		return tab;
 	}
-	
-	void damage(ArrayList<Troupes> t, int d) {	// TO CHANGE : recuperer les degats de la cible attaquante
-		int rand = (int) Math.random() * t.size();
-		Troupes troupe = t.get(rand);
+
+	public int getDamage(ArrayList<Troupes> tab) {	// Fonction permettant de faire des degats a la cible
+		int rand = (int) Math.random() * tab.size();
+		Troupes troupe_to_attack = tab.get(rand);
+		int d = 0;
 		
-		int new_d = d - troupe.vie;
-		troupe.vie = troupe.vie - d;
-		
-		if(troupe.vie <= 0) {
-			t.remove(rand);
+		troupe_to_attack.vie = troupe_to_attack.vie - this.degat;
+		if(troupe_to_attack.vie <= 0) {
+			d = -troupe_to_attack.vie;
+			tab.remove(troupe_to_attack);
 		}
 		
-		if(t.isEmpty()) {	// Gerer le cas de toutes les troupes mortes
-			t.clear();
-		}
-		else if(new_d > 0) {
-			damage(t, new_d);
+		if(tab.isEmpty()) {
+			tab.clear();
+			d = 0;
+			// case winner
 		}
 		
-	}
-	
-	Troupes Piquier() {
-		this.name = "Piquier";
-		this.cout = 100;
-		this.temps = 5;
-		this.vitesse = 2;
-		this.vie = 1;
-		this.degat = 1;
-		return null;
-	}
-	
-	Troupes Chevalier() {
-		this.name = "Chevalier";
-		this.cout = 500;
-		this.temps = 20;
-		this.vitesse = 6;
-		this.vie = 3;
-		this.degat = 5;
-		return null;
-	}
-	
-	Troupes Onagre() {
-		this.name = "Onagre";
-		this.cout = 1000;
-		this.temps = 50;
-		this.vitesse = 1;
-		this.vie = 5;
-		this.degat = 10;
-		return null;
-	}
+		return d;
+		// gerer le cas du rappel de fonction avec les degats restants, pour l'instant : retourner d et rappeler si besoin
+	}	
+
 
 	// getters & setters 
 	
-	public String getName() {
-		return name;
-	}
-
 	@Override
 	public String toString() {
-		return "Troupes : " + name;
+		return "Troupes : ";
+	}
+
+	public String getName() {
+		return name;
 	}
 
 	public void setName(String name) {

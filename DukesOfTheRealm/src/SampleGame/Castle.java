@@ -23,8 +23,8 @@ public class Castle {	// w : 1500 ; h : 1000 pour la map
 		this.duc = duc;
 		this.tresor = 0;
 		this.niveau = 1;
-		this.porte = new BuiltCastle.elCastleDoor();
-		this.coordonee_du_chateau = autre fichier pour créer carré + porte
+		//this.porte = new BuiltCastle.elCastleDoor();
+		//this.coordonee_du_chateau = autre fichier pour créer carré + porte
 		this.tabTroupes = Troupes.createTroupes(4,2,2);
 		this.piquier = countTroupes("Piquier", tabTroupes);	// voir si necessaire de le mettre ou si on l'affiche lors de l'appel � l'affichage des troupes
 		this.chevalier = countTroupes("Chevalier", tabTroupes);
@@ -36,6 +36,11 @@ public class Castle {	// w : 1500 ; h : 1000 pour la map
 		this.tresor = 0;
 		this.niveau = (int) Math.random() * 5;
 		this.tabTroupes = Troupes.createTroupes(3,3,3); // a definir
+	}
+	
+
+	public void castleHasBeenDestroyed(Castle c) {
+		c.duc = this.duc;		
 	}
 	
 	public int countTroupes(String t, ArrayList<Troupes> tab) {
@@ -69,6 +74,8 @@ public class Castle {	// w : 1500 ; h : 1000 pour la map
 	void updateRevenu() {
 		this.revenu = this.niveau * 10;
 	}
+	
+	
 
 	// getters & setters	
 
