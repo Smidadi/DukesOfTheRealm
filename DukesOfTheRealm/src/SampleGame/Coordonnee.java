@@ -19,4 +19,10 @@ public class Coordonnee {
 		this.x = dx;
 		this.y = dy;
 	}
+	
+	public static double distance(Coordonnee castle, Coordonnee newCastle){
+        double d1 = castle.x - newCastle.x;
+        double d2 = castle.y - newCastle.y;
+        return Math.sqrt(d1*d1 + d2*d2);
+   }
 }

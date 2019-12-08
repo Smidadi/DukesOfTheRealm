@@ -1,33 +1,59 @@
 package SampleGame;
 
-//50px : chateau d'origine ; 25px : chateau neutre
+import java.util.ArrayList;
 
-public class BuiltCastle {
-	
-	public BuiltCastle(String typeCastle) {
-		Coordonnee center = new Coordonnee();
+
+public class BuiltCastle extends ShapeOfCastle {	
+
+	public  BuiltCastle(String typeCastle, ArrayList<ShapeOfCastle> tabOfCastle) {
+		Coordonnee c = new Coordonnee();
+		while(inRange(c, typeCastle, tabOfCastle) == false) {
+			c = new Coordonnee();
+		}
+		setCenter(c);
+		setType(typeCastle);
 		int size;
+		int nb = tabOfCastle.size();
 		if(typeCastle == "Duc") {
-			size = 24;
+			setName("Duc n°" + Integer.toString(nb));
+			size = 25;
 		}else {
-			size = 12;
+			setName("Baron n°" + Integer.toString(nb));
+			size = 15;
 		}
-		Coordonnee cornerLT = new Coordonnee(center.x - size, center.y + size);
-		Coordonnee cornerLB = new Coordonnee(center.x - size, center.y - size);
-		Coordonnee cornerRT = new Coordonnee(center.x + size, center.y + size);
-		Coordonnee cornerRB = new Coordonnee(center.x + size, center.y - size);
+		setCornerLT(new Coordonnee(getCenter().x - size, getCenter().y - size));
+		setCornerLB(new Coordonnee(getCenter().x - size, getCenter().y + size));
+		setCornerRT(new Coordonnee(getCenter().x + size, getCenter().y - size));
+		setCornerRB(new Coordonnee(getCenter().x + size, getCenter().y + size));
+		setCastleDoor(new CastleDoor(getCenter(),typeCastle));
 	}
+		
+
 	
-	public void CastleDoor(String typeCastle) { //N:0;E:1;S:2;W:3
-		int Side = (int) (Math.random() * 4);
-		switch(Side) {
-			case 0:
-				
-			case 1:
-			case 2:
-			case 3:
-			default:
-				
+	private Boolean inRange(Coordonnee center, String typeCastle, ArrayList<ShapeOfCastle> tabOfCastle) {
+		for(int i=0;i<tabOfCastle.size();i++) {
+			if(tabOfCastle.get(i).getType() == "Duc") {
+				if(typeCastle == "Duc") {
+					if(Coordonnee.distance(tabOfCastle.get(i).getCenter(),center) < 85) {
+						return false;
+					}
+				}else {
+					if(Coordonnee.distance(tabOfCastle.get(i).getCenter(),center) < 75) {
+						return false;
+					}
+				}				
+			}else {
+				if(typeCastle == "Duc") {
+					if(Coordonnee.distance(tabOfCastle.get(i).getCenter(),center) < 75) {
+						return false;
+					}else {
+						if(Coordonnee.distance(tabOfCastle.get(i).getCenter(),center) < 65) {
+							return false;
+						}
+					}
+				}
+			}
 		}
+		return true;
 	}
 }
