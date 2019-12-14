@@ -4,15 +4,14 @@ import java.util.ArrayList;
 
 public class Troupes {
 	
-	private String name;
-	private int cout;
-	private int temps;
-	private int vitesse;
-	private int vie;
-	private int degat;
+	protected String name;
+	protected int cout;
+	protected int temps;
+	protected int vitesse;
+	protected int vie;
+	protected int degat;
 	
 	// Taille troupes : 10 px | Piquier : triangle | Onagre : carre | Chevalier : rond
-	
 	
 	public static ArrayList<Troupes> createTroupes(int p, int c, int o) {
 		ArrayList<Troupes> tab = new ArrayList<Troupes>();

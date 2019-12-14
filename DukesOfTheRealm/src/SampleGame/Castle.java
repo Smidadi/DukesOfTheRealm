@@ -14,7 +14,6 @@ public class Castle {	// w : 1500 ; h : 1000 pour la map
 	
 	private int production;		// type production : voir après création de la classe Troupes + mettre dans class Castle
 	private int deplacement; 	// type : coordonnee
-	private int porte; 	// type : coordonee
 	
 	ArrayList<Troupes> tabTroupes;
 	 
@@ -23,12 +22,7 @@ public class Castle {	// w : 1500 ; h : 1000 pour la map
 		this.duc = duc;
 		this.tresor = 0;
 		this.niveau = 1;
-		//this.porte = new BuiltCastle.elCastleDoor();
-		//this.coordonee_du_chateau = autre fichier pour créer carré + porte
 		this.tabTroupes = Troupes.createTroupes(4,2,2);
-		this.piquier = countTroupes("Piquier", tabTroupes);	// voir si necessaire de le mettre ou si on l'affiche lors de l'appel � l'affichage des troupes
-		this.chevalier = countTroupes("Chevalier", tabTroupes);
-		this.onagre = countTroupes("Onagre", tabTroupes);
 	}
 	
 	public Castle() {	// Baron : possede un niveau alea entre 0 et 5 | chateau 25 * 25
@@ -166,16 +160,6 @@ public class Castle {	// w : 1500 ; h : 1000 pour la map
 
 	public void setDeplacement(int deplacement) {
 		this.deplacement = deplacement;
-	}
-
-
-	public int getPorte() {
-		return porte;
-	}
-
-
-	public void setPorte(int porte) {
-		this.porte = porte;
 	}
 
 
