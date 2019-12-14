@@ -1,4 +1,4 @@
-package SampleGame;
+gpackage SampleGame;
 
 import java.util.ArrayList;
 
@@ -16,6 +16,7 @@ public class Castle {	// w : 1500 ; h : 1000 pour la map
 	private int deplacement; 	// type : coordonnee
 	
 	ArrayList<Troupes> tabTroupes;
+	//private Object castleDoor;
 	 
 	
 	public Castle(String duc) {	// Chateau 50 * 50
@@ -23,6 +24,7 @@ public class Castle {	// w : 1500 ; h : 1000 pour la map
 		this.tresor = 0;
 		this.niveau = 1;
 		this.tabTroupes = Troupes.createTroupes(4,2,2);
+		//this.castleDoor.getCenter();
 	}
 	
 	public Castle() {	// Baron : possede un niveau alea entre 0 et 5 | chateau 25 * 25
