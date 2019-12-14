@@ -1,4 +1,4 @@
-gpackage SampleGame;
+package SampleGame;
 
 import java.util.ArrayList;
 

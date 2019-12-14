@@ -19,9 +19,4 @@ public class Piquier extends Troupes {
 		return super.toString() + name;
 	}
 
-	// Getters & setters
-
-
-
-
 }
