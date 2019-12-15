@@ -2,174 +2,100 @@ package SampleGame;
 
 import java.util.ArrayList;
 
-public class Castle {	// w : 1500 ; h : 1000 pour la map
-	private String duc;
-	private int tresor;
+public class Castle {
+	
+	private String name;
+	private String type;
 	private int niveau;
+	private int tresor;	
 	private int revenu;
+	// private int production;  type : troupes/am�lioration + nb tours restant 
+	// ORdre de d�placement = cible + troupes 
+	private ArrayList<Troupes> tabTroupes;
+	private CastleStruct Castle;
+	private CastleDoor CastleDoor;
 	
-	private int piquier;	// ou type piquier / chevalier / onagre : voir après création de la class Troupes (anglais : Troupe)
-	private int chevalier;
-	private int onagre;
 	
-	private int production;		// type production : voir après création de la classe Troupes + mettre dans class Castle
-	private int deplacement; 	// type : coordonnee
-	
-	ArrayList<Troupes> tabTroupes;
-	//private Object castleDoor;
-	 
-	
-	public Castle(String duc) {	// Chateau 50 * 50
-		this.duc = duc;
-		this.tresor = 0;
-		this.niveau = 1;
-		this.tabTroupes = Troupes.createTroupes(4,2,2);
-		//this.castleDoor.getCenter();
-	}
-	
-	public Castle() {	// Baron : possede un niveau alea entre 0 et 5 | chateau 25 * 25
-		this.duc = "Baron";
-		this.tresor = 0;
-		this.niveau = (int) Math.random() * 5;
-		this.tabTroupes = Troupes.createTroupes(3,3,3); // a definir
-	}
-	
-
-	public void castleHasBeenDestroyed(Castle c) {
-		c.duc = this.duc;		
-	}
-	
-	public int countTroupes(String t, ArrayList<Troupes> tab) {
-		int cpt = 0;
-		switch(t) {
-		case "Piquier" :
-			for(int i = 0; i < tab.size(); i++) {
-				if(tab.get(i).getName() == t) {
-					cpt++;
-				}
+	Castle(String type, ArrayList<Castle> tabOfCastle) {
+		int nb = tabOfCastle.size();
+		if(type == "Duc" || type == "Player") {
+			if(type == "Player") {
+				this.name = type;
 			}
-			return cpt;
-		case "Chevalier" :
-			for(int i = 0; i < tab.size(); i++) {
-				if(tab.get(i).getName() == t) {
-					cpt++;
-				}
+			else {
+				this.name = "Duc " + Integer.toString(nb);
 			}
-			return cpt;
-		case "Onagre" :
-			for(int i = 0; i < tab.size(); i++) {
-				if(tab.get(i).getName() == t) {
-					cpt++;
-				}
-			}
-			return cpt;
+			this.niveau = 1;
+			this.tresor = 0;
+			this.tabTroupes = Troupes.createTroupes(4,2,2); // Temporary 			
+			CastleStruct DucCastle = new CastleStruct(type,tabOfCastle);
+			System.out.println(DucCastle.center);
+			new CastleDoor(DucCastle.center,type);
 		}
-		return cpt;
-	}
-	
-	void updateRevenu() {
+		if(type == "Baron") {
+			this.name = "Baron " + Integer.toString(nb);
+			this.niveau = 1 + (int) Math.random() * 5;
+			this.tresor = 500 + (int) Math.random() * 1001;	// 500 - 1500			
+			this.tabTroupes = Troupes.createTroupes(1 + (int) Math.random() * 5, 1 + (int) Math.random() * 5, 1 + (int) Math.random() * 5); // temporaire
+			CastleStruct BaronCastle = new CastleStruct(type,tabOfCastle);
+			new CastleDoor(BaronCastle.center,type);
+		}
+		
+		this.type = type;
 		this.revenu = this.niveau * 10;
 	}
 	
+
 	
-
-	// getters & setters	
-
-	public String getDuc() {
-		return duc;
+	
+	/* ----- GETTER ----- */
+	/* ----- SETTER ----- */
+	
+	public String getName() {
+		return name;
 	}
-
-
-	public void setDuc(String duc) {
-		this.duc = duc;
+	public void setName(String name) {
+		this.name = name;
 	}
-
-
-	public int getTresor() {
-		return tresor;
+	public String getType() {
+		return type;
 	}
-
-
-	public void setTresor(int tresor) {
-		this.tresor = tresor;
+	public void setType(String type) {
+		this.type = type;
 	}
-
-
+	public CastleStruct getCastle() {
+		return Castle;
+	}
+	public void setCastle(CastleStruct castle) {
+		Castle = castle;
+	}
+	public CastleDoor getCastleDoor() {
+		return CastleDoor;
+	}
+	public void setCastleDoor(CastleDoor castleDoor) {
+		CastleDoor = castleDoor;
+	}
 	public int getNiveau() {
 		return niveau;
 	}
-
-
 	public void setNiveau(int niveau) {
 		this.niveau = niveau;
 	}
-
-
+	public int getTresor() {
+		return tresor;
+	}
+	public void setTresor(int tresor) {
+		this.tresor = tresor;
+	}
 	public int getRevenu() {
 		return revenu;
 	}
-
-
 	public void setRevenu(int revenu) {
 		this.revenu = revenu;
 	}
-
-
-	public int getPiquier() {
-		return piquier;
-	}
-
-
-	public void setPiquier(int piquier) {
-		this.piquier = piquier;
-	}
-
-
-	public int getChevalier() {
-		return chevalier;
-	}
-
-
-	public void setChevalier(int chevalier) {
-		this.chevalier = chevalier;
-	}
-
-
-	public int getOnagre() {
-		return onagre;
-	}
-
-
-	public void setOnagre(int onagre) {
-		this.onagre = onagre;
-	}
-
-
-	public int getProduction() {
-		return production;
-	}
-
-
-	public void setProduction(int production) {
-		this.production = production;
-	}
-
-
-	public int getDeplacement() {
-		return deplacement;
-	}
-
-
-	public void setDeplacement(int deplacement) {
-		this.deplacement = deplacement;
-	}
-
-
 	public ArrayList<Troupes> getTabTroupes() {
 		return tabTroupes;
 	}
-
-
 	public void setTabTroupes(ArrayList<Troupes> tabTroupes) {
 		this.tabTroupes = tabTroupes;
 	}

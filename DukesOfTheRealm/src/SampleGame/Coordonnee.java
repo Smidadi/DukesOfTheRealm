@@ -25,4 +25,11 @@ public class Coordonnee {
         double d2 = castle.y - newCastle.y;
         return Math.sqrt(d1*d1 + d2*d2);
    }
+
+	@Override
+	public String toString() {
+		return "Coordonnee [x=" + x + ", y=" + y + "]";
+	}
+	
+	
 }

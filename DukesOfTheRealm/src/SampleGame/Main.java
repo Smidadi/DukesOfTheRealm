@@ -30,14 +30,16 @@ public class Main extends Application {
 	// jusque la
 	
 	public static void main(String[] args) {
-		Castle c = new Castle("Moi");
-		Castle c_d = new Castle("Meurs");
-		System.out.println(c.tabTroupes);
+		ArrayList<Castle> tabOfCastle = new ArrayList<Castle>();
+		Castle c = new Castle("Player", tabOfCastle);
 		
-		System.out.println(c.countTroupes("Piquier",c.tabTroupes));	// OK
 		
-		c.castleHasBeenDestroyed(c_d);
-		System.out.println(c_d.getDuc());
+		
+		System.out.println(c.getTabTroupes());
+		
+		System.out.println(RunACastle.countTroupes("Piquier",c.getTabTroupes()));	// OK
+		
+	
 		
 		
 		// A enlever
