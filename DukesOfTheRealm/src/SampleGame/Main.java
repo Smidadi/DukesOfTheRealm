@@ -16,10 +16,10 @@ public class Main extends Application {
 	@Override 
 	public void start(Stage primaryStage) throws Exception { 
 		
-		final Rectangle rectangle = new Rectangle(Math.random()*Settings.SCENE_WIDTH, Math.random()*Settings.SCENE_WIDTH , Math.random()*Settings.SCENE_HEIGHT, Math.random()*Settings.SCENE_HEIGHT); 
-		rectangle.setFill(Color.BROWN); 
+		final Rectangle r = new Rectangle(100, 100, 200, 200);	
+		r.setFill(Color.BROWN); 
 		final Pane root = new Pane(); 
-		root.getChildren().setAll(rectangle); 
+		root.getChildren().setAll(r); 
 		
 		scene = new Scene(root, Settings.SCENE_WIDTH, Settings.SCENE_HEIGHT, Color.LIGHTGREEN); 
 		primaryStage.setTitle("DukesOfTheRealm"); 
@@ -40,7 +40,6 @@ public class Main extends Application {
 		System.out.println(RunACastle.countTroupes("Piquier",c.getTabTroupes()));	// OK
 		
 	
-		
 		
 		// A enlever
 		Application.launch(args); 
