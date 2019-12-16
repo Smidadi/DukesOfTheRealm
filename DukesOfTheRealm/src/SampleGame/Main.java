@@ -15,11 +15,29 @@ public class Main extends Application {
 	
 	@Override 
 	public void start(Stage primaryStage) throws Exception { 
+		ArrayList<Castle> tabOfCastle = new ArrayList<Castle>();
+		Castle c = new Castle("Player", tabOfCastle);
+		tabOfCastle.add(c);
+		Castle b = new Castle("Baron", tabOfCastle);
+		tabOfCastle.add(b);
+
+		Pane root = new Pane(); 
 		
-		final Rectangle r = new Rectangle(100, 100, 200, 200);	
-		r.setFill(Color.BROWN); 
-		final Pane root = new Pane(); 
-		root.getChildren().setAll(r); 
+		//Rectangle(x,y,w,h);
+		
+		Rectangle rc = new Rectangle(c.getCastle().getCornerLT().getX(), c.getCastle().getCornerLT().getY(), Coordonnee.distance(c.getCastle().getCornerLT(), c.getCastle().getCornerRT()), Coordonnee.distance(c.getCastle().getCornerLT(), c.getCastle().getCornerLB()));	
+		Rectangle dc = new Rectangle(c.getCastleDoor().getCornerLT().getX(),c.getCastleDoor().getCornerLT().getY(), Coordonnee.distance(c.getCastleDoor().getCornerLT(), c.getCastleDoor().getCornerRT()), Coordonnee.distance(c.getCastleDoor().getCornerLT(), c.getCastleDoor().getCornerLB()));	
+		dc.setFill(Color.WHITE);
+		rc.setFill(Color.BROWN); 
+		root.getChildren().add(rc); 
+		root.getChildren().add(dc); 
+		
+		Rectangle rb = new Rectangle(b.getCastle().getCornerLT().getX(), b.getCastle().getCornerLT().getY(), Coordonnee.distance(b.getCastle().getCornerLT(), b.getCastle().getCornerRT()), Coordonnee.distance(b.getCastle().getCornerLT(), b.getCastle().getCornerLB()));	
+		Rectangle db = new Rectangle(b.getCastleDoor().getCornerLT().getX(),b.getCastleDoor().getCornerLT().getY(), Coordonnee.distance(b.getCastleDoor().getCornerLT(), b.getCastleDoor().getCornerRT()), Coordonnee.distance(b.getCastleDoor().getCornerLT(), b.getCastleDoor().getCornerLB()));	
+		db.setFill(Color.WHITE);
+		rb.setFill(Color.GRAY); 
+		root.getChildren().add(rb); 
+		root.getChildren().add(db); 
 		
 		scene = new Scene(root, Settings.SCENE_WIDTH, Settings.SCENE_HEIGHT, Color.LIGHTGREEN); 
 		primaryStage.setTitle("DukesOfTheRealm"); 
@@ -30,16 +48,7 @@ public class Main extends Application {
 	// jusque la
 	
 	public static void main(String[] args) {
-		ArrayList<Castle> tabOfCastle = new ArrayList<Castle>();
-		Castle c = new Castle("Player", tabOfCastle);
 		
-		
-		
-		System.out.println(c.getTabTroupes());
-		
-		System.out.println(RunACastle.countTroupes("Piquier",c.getTabTroupes()));	// OK
-		
-	
 		
 		// A enlever
 		Application.launch(args); 

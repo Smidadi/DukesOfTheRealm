@@ -28,17 +28,16 @@ public class Castle {
 			this.niveau = 1;
 			this.tresor = 0;
 			this.tabTroupes = Troupes.createTroupes(4,2,2); // Temporary 			
-			CastleStruct DucCastle = new CastleStruct(type,tabOfCastle);
-			System.out.println(DucCastle.center);
-			new CastleDoor(DucCastle.center,type);
+			this.Castle = new CastleStruct(type,tabOfCastle);
+			this.CastleDoor = new CastleDoor(this.Castle.getCenter(),type);
 		}
 		if(type == "Baron") {
 			this.name = "Baron " + Integer.toString(nb);
 			this.niveau = 1 + (int) Math.random() * 5;
 			this.tresor = 500 + (int) Math.random() * 1001;	// 500 - 1500			
 			this.tabTroupes = Troupes.createTroupes(1 + (int) Math.random() * 5, 1 + (int) Math.random() * 5, 1 + (int) Math.random() * 5); // temporaire
-			CastleStruct BaronCastle = new CastleStruct(type,tabOfCastle);
-			new CastleDoor(BaronCastle.center,type);
+			this.Castle = new CastleStruct(type,tabOfCastle);
+			this.CastleDoor = new CastleDoor(this.Castle.getCenter(),type);
 		}
 		
 		this.type = type;
