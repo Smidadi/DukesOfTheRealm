@@ -10,21 +10,20 @@ public class CastleStruct  {
 	CastleStruct(String typeCastle, ArrayList<Castle> tabOfCastle) {
 		
 		Coordonnee c = new Coordonnee();
-		while(inRange(c, typeCastle, tabOfCastle) == false) {
+		while(inRange(c, typeCastle, tabOfCastle) == false ) {
 			c = new Coordonnee();
 		}
 		this.center = c;
 		int size;
 		if(typeCastle == "Duc" || typeCastle == "Player") {
-			size = 60;
+			size = Settings.DUCSIZE;
 		}else {
-			size = 40;
+			size = Settings.BARONSIZE;
 		}
 		this.cornerLT = new Coordonnee(center.getX() - size, center.getY() - size);
 		this.cornerLB = new Coordonnee(center.getX() - size, center.getY() + size);
 		this.cornerRT = new Coordonnee(center.getX() + size, center.getY() - size);
 		this.cornerRB = new Coordonnee(center.getX() + size, center.getY() + size);
-		
 	}
 		
 
@@ -33,20 +32,20 @@ public class CastleStruct  {
 		for(int i=0;i<tabOfCastle.size();i++) {
 			if(tabOfCastle.get(i).getType() == "Duc") {
 				if(typeCastle == "Duc") {
-					if(Coordonnee.distance(tabOfCastle.get(i).getCastle().center,center) < 85) {
+					if(Coordonnee.distance(tabOfCastle.get(i).getCastle().center,center) < (Settings.DUCSIZE * 2 + Settings.DOORSIZE) ) {
 						return false;
 					}
 				}else {
-					if(Coordonnee.distance(tabOfCastle.get(i).getCastle().center,center) < 75) {
+					if(Coordonnee.distance(tabOfCastle.get(i).getCastle().center,center) < (Settings.BARONSIZE + Settings.DUCSIZE + Settings.DOORSIZE)) {
 						return false;
 					}
 				}				
 			}else {
 				if(typeCastle == "Duc") {
-					if(Coordonnee.distance(tabOfCastle.get(i).getCastle().center,center) < 75) {
+					if(Coordonnee.distance(tabOfCastle.get(i).getCastle().center,center) < (Settings.BARONSIZE + Settings.DUCSIZE + Settings.DOORSIZE)) {
 						return false;
 					}else {
-						if(Coordonnee.distance(tabOfCastle.get(i).getCastle().center,center) < 65) {
+						if(Coordonnee.distance(tabOfCastle.get(i).getCastle().center,center) < (Settings.BARONSIZE * 2 + Settings.DOORSIZE)) {
 							return false;
 						}
 					}

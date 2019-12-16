@@ -11,8 +11,8 @@ public class Coordonnee {
 	private int x, y;
 	
 	public Coordonnee() {
-		this.x = (int) (25 + Math.random()* 1451);
-		this.y = (int) (25 + Math.random()* 951);		
+		this.x = (int) (Settings.DOORSIZE + Settings.DUCSIZE + Math.random()* (Settings.SCENE_WIDTH - (Settings.DOORSIZE + Settings.DUCSIZE)));
+		this.y = (int) (Settings.DOORSIZE + Settings.DUCSIZE + Math.random()* (Settings.SCENE_HEIGHT - (Settings.DOORSIZE + Settings.DUCSIZE)));		
 	}
 	
 	public Coordonnee(int dx, int dy) {

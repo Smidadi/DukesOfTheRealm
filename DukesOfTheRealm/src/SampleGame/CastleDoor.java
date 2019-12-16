@@ -5,16 +5,15 @@ public class CastleDoor {
 	private Coordonnee center, cornerLT, cornerLB, cornerRT, cornerRB;
 	
 	CastleDoor(Coordonnee center2, String typeCastle) {	
-		int sizeDW = 30;
-		int sizeDH = 2;
+		int sizeDW = Settings.DOORSIZE;
+		int sizeDH = 2; //Pixels
 		int Side = (int) (Math.random() * 4);
 		int size;
 		if(typeCastle == "Duc" || typeCastle == "Player") {
-			size = 60;
+			size = Settings.DUCSIZE;
 		}else {
-			size = 40;
+			size = Settings.BARONSIZE;
 		}
-		
 		switch(Side) {
 			case 0: //North
 				this.center = new Coordonnee(center2.getX() , center2.getY() + size);
