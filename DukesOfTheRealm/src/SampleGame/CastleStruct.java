@@ -10,7 +10,7 @@ public class CastleStruct  {
 	CastleStruct(String typeCastle, ArrayList<Castle> tabOfCastle) {
 		
 		Coordonnee c = new Coordonnee();
-		while(inRange(c, typeCastle, tabOfCastle) == false ) {
+		while(invalideCoordonnee(c, typeCastle, tabOfCastle) == false ) {
 			c = new Coordonnee();
 		}
 		this.center = c;
@@ -28,39 +28,45 @@ public class CastleStruct  {
 		
 
 	
-	private Boolean inRange(Coordonnee center, String typeCastle, ArrayList<Castle> tabOfCastle) {
-		double DbetweenDD = (Settings.DUCSIZE * 2 + Settings.DOORSIZE);
-		double DbetweenDB = (Settings.BARONSIZE + Settings.DUCSIZE + Settings.DOORSIZE);
-		double DbetweenBB = (Settings.BARONSIZE * 2 + Settings.DOORSIZE);
-		
+	private Boolean invalideCoordonnee(Coordonnee center, String typeCastle, ArrayList<Castle> tabOfCastle) {
 		for(int i=0;i<tabOfCastle.size();i++) {
-			if(typeCastle == "Duc" ){ //castle to build - DUC
-				 if(tabOfCastle.get(i).getType() == "Duc" || tabOfCastle.get(i).getType() == "Player") {	//castle already on the plain - DUC
-					if(Coordonnee.distance(tabOfCastle.get(i).getCastle().getCenter(), center) < DbetweenDD ) {
-						return false;
-					}
-				}else {	//castle already on the plain - BARON
-					if(Coordonnee.distance(tabOfCastle.get(i).getCastle().getCenter(), center) < DbetweenDB) {
-						return false;
-					}
-				}				
-			}else {	//castle to build - BARON
-				if(tabOfCastle.get(i).getType() == "Duc" || tabOfCastle.get(i).getType() == "Player") {	//castle already on the plain - DUC
-					if(Coordonnee.distance(tabOfCastle.get(i).getCastle().getCenter(), center) < DbetweenDB) {
-						return false;
-					}else {	//castle already on the plain - BARON
-						System.out.println(Coordonnee.distance(tabOfCastle.get(i).getCastle().getCenter(),center));
-						if(Coordonnee.distance(tabOfCastle.get(i).getCastle().getCenter(), center) < DbetweenBB) {
-							System.out.println("Name : " + tabOfCastle.get(i).getName() + " -> " + Coordonnee.distance(tabOfCastle.get(i).getCastle().getCenter(),center) + " VS " + (Settings.BARONSIZE * 2 + Settings.DOORSIZE) + "\n" );
-							return false;
-						}
-					}
-				}
+			if(ConflicBetweenCastle(tabOfCastle.get(i).getCastle(), center, typeCastle)) {
+				return false;
 			}
 		}
 		return true;
 	}
 
+	private Boolean ConflicBetweenCastle(CastleStruct Castle, Coordonnee newCastle, String newType) {		
+		int size;
+		if( newType == "Duc" || newType == "player") {
+			size = Settings.DUCSIZE;
+		}else {
+			size = Settings.BARONSIZE;
+		}
+		Coordonnee cornerLT = new Coordonnee(newCastle.getX() - size, newCastle.getY() - size);
+		Coordonnee cornerLB = new Coordonnee(newCastle.getX() - size, newCastle.getY() + size);
+		Coordonnee cornerRT = new Coordonnee(newCastle.getX() + size, newCastle.getY() - size);
+		Coordonnee cornerRB = new Coordonnee(newCastle.getX() + size, newCastle.getY() + size);
+		if(inASquare(Castle, cornerLT) || inASquare(Castle, cornerLB) || inASquare(Castle, cornerRT) || inASquare(Castle, cornerRB)){
+			return true;
+		}else {
+			return false;
+		}
+	}
+	
+	private Boolean inASquare(CastleStruct Castle, Coordonnee aPoint) {
+		// Xmin <= x <= Xmax ET Ymin <= y <= Ymax
+		int xMin = Castle.getCornerLT().getX() - Settings.DOORSIZE;
+		int xMax = Castle.getCornerRT().getX() + Settings.DOORSIZE;
+		int yMin = Castle.getCornerLT().getX() - Settings.DOORSIZE;
+		int yMax = Castle.getCornerLB().getX() + Settings.DOORSIZE;
+		if( (xMin <= aPoint.getX() && aPoint.getX() <= xMax) && (yMin <= aPoint.getY() && aPoint.getY() <= yMax) ) {
+			return true;
+		}
+		return false;
+	}
+		
 
 	/* ----- GETTER ----- */
 	/* ----- SETTER ----- */
