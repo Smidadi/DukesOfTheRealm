@@ -29,23 +29,29 @@ public class CastleStruct  {
 
 	
 	private Boolean inRange(Coordonnee center, String typeCastle, ArrayList<Castle> tabOfCastle) {
+		double DbetweenDD = (Settings.DUCSIZE * 2 + Settings.DOORSIZE);
+		double DbetweenDB = (Settings.BARONSIZE + Settings.DUCSIZE + Settings.DOORSIZE);
+		double DbetweenBB = (Settings.BARONSIZE * 2 + Settings.DOORSIZE);
+		
 		for(int i=0;i<tabOfCastle.size();i++) {
-			if(tabOfCastle.get(i).getType() == "Duc") {
-				if(typeCastle == "Duc") {
-					if(Coordonnee.distance(tabOfCastle.get(i).getCastle().center,center) < (Settings.DUCSIZE * 2 + Settings.DOORSIZE) ) {
+			if(typeCastle == "Duc" ){ //castle to build - DUC
+				 if(tabOfCastle.get(i).getType() == "Duc" || tabOfCastle.get(i).getType() == "Player") {	//castle already on the plain - DUC
+					if(Coordonnee.distance(tabOfCastle.get(i).getCastle().getCenter(), center) < DbetweenDD ) {
 						return false;
 					}
-				}else {
-					if(Coordonnee.distance(tabOfCastle.get(i).getCastle().center,center) < (Settings.BARONSIZE + Settings.DUCSIZE + Settings.DOORSIZE)) {
+				}else {	//castle already on the plain - BARON
+					if(Coordonnee.distance(tabOfCastle.get(i).getCastle().getCenter(), center) < DbetweenDB) {
 						return false;
 					}
 				}				
-			}else {
-				if(typeCastle == "Duc") {
-					if(Coordonnee.distance(tabOfCastle.get(i).getCastle().center,center) < (Settings.BARONSIZE + Settings.DUCSIZE + Settings.DOORSIZE)) {
+			}else {	//castle to build - BARON
+				if(tabOfCastle.get(i).getType() == "Duc" || tabOfCastle.get(i).getType() == "Player") {	//castle already on the plain - DUC
+					if(Coordonnee.distance(tabOfCastle.get(i).getCastle().getCenter(), center) < DbetweenDB) {
 						return false;
-					}else {
-						if(Coordonnee.distance(tabOfCastle.get(i).getCastle().center,center) < (Settings.BARONSIZE * 2 + Settings.DOORSIZE)) {
+					}else {	//castle already on the plain - BARON
+						System.out.println(Coordonnee.distance(tabOfCastle.get(i).getCastle().getCenter(),center));
+						if(Coordonnee.distance(tabOfCastle.get(i).getCastle().getCenter(), center) < DbetweenBB) {
+							System.out.println("Name : " + tabOfCastle.get(i).getName() + " -> " + Coordonnee.distance(tabOfCastle.get(i).getCastle().getCenter(),center) + " VS " + (Settings.BARONSIZE * 2 + Settings.DOORSIZE) + "\n" );
 							return false;
 						}
 					}

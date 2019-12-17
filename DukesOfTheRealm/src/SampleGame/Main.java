@@ -16,7 +16,7 @@ public class Main extends Application {
 	@Override 
 	public void start(Stage primaryStage) throws Exception { 
 		
-		ArrayList<Castle> tabOfCastle = Build(100,5);
+		ArrayList<Castle> tabOfCastle = Build(10,5);
 		
 
 		Pane root = new Pane(); 
@@ -24,6 +24,14 @@ public class Main extends Application {
 		//Rectangle(x,y,w,h);
 		
 		printAllCastle(tabOfCastle, root);
+		for(int i=0 ; i<tabOfCastle.size() ; i++) {
+			System.out.println("Name : " + tabOfCastle.get(i).getName() + "\n");
+			Coordonnee c = tabOfCastle.get(i).getCastle().getCenter();
+			for(int k=0; k<tabOfCastle.size() ; k++) {
+				System.out.println("   Name : " + tabOfCastle.get(k).getName() + "|| distance : " + Coordonnee.distance(c, tabOfCastle.get(k).getCastle().getCenter()) + "\n");
+			}
+			
+		}
 		
 		scene = new Scene(root, Settings.SCENE_WIDTH, Settings.SCENE_HEIGHT, Color.LIGHTGREEN); 
 		primaryStage.setTitle("DukesOfTheRealm"); 
